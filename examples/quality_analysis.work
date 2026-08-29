@@ -1,0 +1,46 @@
+# OpenWorkLang (.work) Example: Production Quality Analyst Agent
+# Compiles into OpenWorkCompiler WorkIR (work.yaml) and LinkML Schemas
+
+work quality_analyst {
+  goal: "Analyze production line quality anomaly root causes and generate remediation plans"
+
+  inputs:
+    - production_data
+    - quality_inspection_data
+    - equipment_logs
+
+  outputs:
+    - root_cause
+    - evidence
+    - confidence_score
+    - remediation_plan
+
+  tools:
+    - query_mes()
+    - query_sensor()
+    - analyze_statistics()
+    - create_report()
+
+  memory:
+    - short_term
+    - quality_knowledge_base
+
+  invariants:
+    - verify_sensor_calibration
+    - require_human_approval_for_remediation
+
+  workflow:
+    - collect_data
+    - detect_anomaly
+    - find_correlation
+    - determine_root_cause
+    - create_report
+
+  executors: {
+    collect_data: code,
+    detect_anomaly: rule,
+    find_correlation: ml,
+    determine_root_cause: slm,
+    create_report: slm
+  }
+}
